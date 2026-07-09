@@ -95,20 +95,30 @@ def score(reference_answer, model_answer, question=None):
     mod_norm = normalize_text(model_answer)
     
     is_correct = False
+    confidence = 0.0
+    
     if ref_norm == mod_norm:
         is_correct = True
+        confidence = 1.0
     # If the exact normalized reference is inside the model answer, and is a meaningful length
     elif len(ref_norm) > 3 and ref_norm in mod_norm:
         is_correct = True
+        confidence = 1.0
+    # If the model answer is a valid abbreviation fully inside the reference
+    elif len(mod_norm) > 3 and mod_norm in ref_norm:
+        is_correct = True
+        confidence = 1.0
     else:
         # Fuzzy matching fallback to catch minor typos and plurals
         ratio = difflib.SequenceMatcher(None, ref_norm, mod_norm).ratio()
         if ratio > 0.85:
             is_correct = True
+            confidence = ratio  # Dynamic confidence based on fuzzy match!
         else:
             pass # Uncomment below for Dynamic Synonym Fallback (adds ~30s execution time)
             # synonyms = get_synonyms(ref_norm)
             # if mod_norm in synonyms:
             #     is_correct = True
+            #     confidence = 0.9 # High confidence, but penalize slightly for needing a synonym
         
-    return {"is_correct": is_correct, "confidence": 1.0 if is_correct else 0.0}
+    return {"is_correct": is_correct, "confidence": confidence}
