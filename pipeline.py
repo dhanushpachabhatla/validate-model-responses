@@ -28,19 +28,25 @@ def evaluate(records, score_fn=scorer.score):
     """Score every record and aggregate into the results contract."""
     total = defaultdict(int)
     correct = defaultdict(int)
+    num_skipped = 0
     for r in records:
+        if r.get("model_answer") is None or r.get("reference_answer") is None:
+            num_skipped += 1
+            continue
+            
         result = score_fn(r["reference_answer"], r["model_answer"], r.get("question"))
         total[r["category"]] += 1
         if result["is_correct"]:
             correct[r["category"]] += 1
 
-    per_category = {c: correct[c] / total[c] for c in total}
-    overall = sum(per_category.values()) / len(per_category)
+    per_category = {c: correct[c] / total[c] for c in total} if total else {}
+    num_evaluated = sum(total.values())
+    overall = sum(correct.values()) / num_evaluated if num_evaluated > 0 else 0.0
 
     return {
         "overall_score": overall,
-        "num_evaluated": sum(total.values()),
-        "num_skipped": 0,
+        "num_evaluated": num_evaluated,
+        "num_skipped": num_skipped,
         "per_category": per_category,
     }
 
