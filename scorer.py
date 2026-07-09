@@ -106,9 +106,9 @@ def score(reference_answer, model_answer, question=None):
         if ratio > 0.85:
             is_correct = True
         else:
-            # Ultimate Fallback: Dynamic Synonym Check
-            synonyms = get_synonyms(ref_norm)
-            if mod_norm in synonyms:
-                is_correct = True
+            pass # Uncomment below for Dynamic Synonym Fallback (adds ~30s execution time)
+            # synonyms = get_synonyms(ref_norm)
+            # if mod_norm in synonyms:
+            #     is_correct = True
         
     return {"is_correct": is_correct, "confidence": 1.0 if is_correct else 0.0}

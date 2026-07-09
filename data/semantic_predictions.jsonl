@@ -1,0 +1,10 @@
+{"id": "test001", "question": "What do you drive?", "reference_answer": "Automobile", "model_answer": "Car", "category": "easy"}
+{"id": "test002", "question": "What is a synonym for affluent?", "reference_answer": "Wealthy", "model_answer": "Rich", "category": "easy"}
+{"id": "test003", "question": "Who treats patients?", "reference_answer": "Physician", "model_answer": "Doctor", "category": "medium"}
+{"id": "test004", "question": "What is the opposite of alive?", "reference_answer": "Deceased", "model_answer": "Dead", "category": "medium"}
+{"id": "test005", "question": "What is a synonym for glad?", "reference_answer": "Happy", "model_answer": "Joyful", "category": "easy"}
+{"id": "test006", "question": "What is a synonym for acquire?", "reference_answer": "Purchase", "model_answer": "Buy", "category": "easy"}
+{"id": "test007", "question": "What is a synonym for rapid?", "reference_answer": "Fast", "model_answer": "Quick", "category": "medium"}
+{"id": "test008", "question": "What is a synonym for assemble?", "reference_answer": "Construct", "model_answer": "Build", "category": "medium"}
+{"id": "test009", "question": "What is a synonym for challenging?", "reference_answer": "Difficult", "model_answer": "Hard", "category": "hard"}
+{"id": "test010", "question": "What is a synonym for initiate?", "reference_answer": "Begin", "model_answer": "Start", "category": "hard"}
